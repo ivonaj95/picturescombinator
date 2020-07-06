@@ -24,7 +24,7 @@ public class PictureManager {
         canvas = new Canvas(mainPicture);
     }
 
-    public void addPictureTo(Bitmap picture, int positionX, int positionY) {
+    public void addPicture(Bitmap picture, int positionX, int positionY) {
         canvas.drawBitmap(picture, positionX, positionY, null);
     }
 
@@ -40,6 +40,21 @@ public class PictureManager {
 
     public Bitmap getMainPicture(){
         return mainPicture;
+    }
+    
+    public void addPicture(Resources resources, int id, int positionX, int positionY){
+        addPicture(BitmapFactory.decodeResource(resources, id), positionX, positionY);
+    }
+
+    public void addScaledPicture(Resources resources, int id, int positionX, int positionY, int width, int height){
+        Bitmap image = BitmapFactory.decodeResource(resources, id);
+        addPicture(Bitmap.createScaledBitmap(image, width, height, false), positionX, positionY);
+    }
+
+    public void addText(String text, int size, int color, int positionX, int positionY){
+        paint.setColor(color);
+        paint.setTextSize(size);
+        canvas.drawText(text, positionX, positionY, paint);
     }
 
 }
